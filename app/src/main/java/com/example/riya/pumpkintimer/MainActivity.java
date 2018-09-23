@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        seekBar = (SeekBar)findViewById(R.id.seekBar);
-        timer = (TextView)findViewById(R.id.textView);
-        button = (Button)findViewById(R.id.button);
+        seekBar = findViewById(R.id.seekBar);
+        timer = findViewById(R.id.textView);
+        button = findViewById(R.id.button);
 
         seekBar.setMax(600);
         seekBar.setProgress(30);
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void controlTimer(View view) {
 
-        if(counterActive == false) {
+        if(!counterActive) {
             counterActive = true;
             seekBar.setEnabled(false);
             button.setText("Stop");
@@ -72,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
 
             }.start();
         }
-        else if(counterActive == true){
+        else if(counterActive){
             resetTimer();
 
         }
     }
     public void updateTimer(int progress){
-        int minutes = (int) progress/60;
+        int minutes = (int) (progress/60);
         String min = Integer.toString(minutes);
         if(minutes <10)
             min = "0"+minutes;
@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
         String sec = Integer.toString(seconds);
         if (seconds <= 9)
             sec = "0" + seconds;
-        timer.setText(min + ":" +sec);
+        String showTime =min + ":" +sec;
+        timer.setText(showTime);
     }
     public void resetTimer(){
         seekBar.setProgress(30);
